@@ -64,9 +64,9 @@ while game:
         ball.rect.y += speed_y
 
         if sprite.collide_rect(rocket1, ball) or sprite.collide_rect(rocket2, ball):
-            speed_x += -1
+            speed_x *= -1
         if ball.rect.y > 450 or ball.rect.y < 0:
-            speed_y -= -1
+            speed_y *= -1
         if ball.rect.x < 0:
             finish = True
             window.blit(lose1, (200, 200))
