@@ -18,15 +18,15 @@ class GameSprite(sprite.Sprite):
 class Player(GameSprite):
     def update_l(self):
         keys = key.get_pressed()
-        if keys [K_w] and self.rect.y > -50:
+        if keys[K_w] and self.rect.y > -50:
             self.rect.y -= self.speed
-        if keys [k_s] and self.rect.y < 520:
+        if keys[K_s] and self.rect.y < 520:
             self.rect.y += self.speed
     def update_r(self):
         keys = key.get_pressed()
-        if keys [K_UP] and self.rect.y > -50:
+        if keys[K_UP] and self.rect.y > -50:
             self.rect.y -= self.speed
-        if keys [k_DOWN] and self.rect.y < 520:
+        if keys[K_DOWN] and self.rect.y < 520:
             self.rect.y += self.speed
 
 clock = time.Clock()
@@ -37,6 +37,8 @@ finish = False
 speed_x = 3
 speed_y = 3
 
+
+
 rocket1 = Player('grib.png', 20, 250, 5, 100, 200)
 rocket2 = Player('grib.png', 400, 250, 5, 100, 200)
 ball = Player('biden.png', 250, 250, 5, 50, 50)
@@ -46,5 +48,21 @@ font = font.Font(None, 50)
 lose1 = font.render('1 Игрок проиграл!', True, (150, 0, 0))
 lose2 = font.render('2 Игрок проиграл!', True, (150, 0, 0))
 
-display.update()
-clock.tick(60)
+while game:
+    
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
+    if finish != True:
+        window.fill(back)
+        rocket1.reset()
+        rocket2.reset()
+        rocket1.update_l()
+        rocket2.update_r()
+        ball.reset()
+        ball.rect.x += speed_x
+        ball.rect.y += speed_y
+
+
+    display.update()                                               
+    clock.tick(60)
