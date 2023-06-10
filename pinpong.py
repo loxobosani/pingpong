@@ -39,7 +39,7 @@ speed_y = 3
 
 
 
-rocket1 = Player('grib.png', 20, 250, 5, 100, 200)
+rocket1 = Player('grib.png', 20, 200, 5, 100, 150)
 rocket2 = Player('grib.png', 400, 250, 5, 100, 200)
 ball = Player('biden.png', 250, 250, 5, 50, 50)
 font.init()
@@ -62,6 +62,19 @@ while game:
         ball.reset()
         ball.rect.x += speed_x
         ball.rect.y += speed_y
+
+        if sprite.collide_rect(rocket1, ball) or sprite.collide_rect(rocket2, ball):
+            speed_x += -1
+        if ball.rect.y > 450 or ball.rect.y < 0:
+            speed_y -= -1
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200, 200))
+            game = True
+        if ball.rect.x > 450:
+            finish = True
+            window.blit(lose2, (200, 200))
+            game = True
 
 
     display.update()                                               
